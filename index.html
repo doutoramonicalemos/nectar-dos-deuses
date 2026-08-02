@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="referrer"
+        content="strict-origin-when-cross-origin"
+    >
+
+    <title>Néctar dos Deuses</title>
+
+    <style>
+        :root {
+            --fundo: #050505;
+            --amarelo: #ffd900;
+            --verde: #16a34a;
+            --verde-claro: #22c55e;
+            --branco: #ffffff;
+            --cinza: #aaaaaa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            min-height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 26px 14px 50px;
+            background: var(--fundo);
+            color: var(--branco);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .headline {
+            margin-bottom: 25px;
+            color: var(--amarelo);
+            font-size: clamp(23px, 5vw, 42px);
+            font-weight: 900;
+            line-height: 1.15;
+            text-transform: uppercase;
+        }
+
+        .video-container {
+            width: min(100%, 400px);
+            margin: 0 auto;
+            overflow: hidden;
+            border: 1px solid #242424;
+            border-radius: 14px;
+            background: #000000;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            overflow: hidden;
+            background: #000000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .oferta {
+            display: none;
+            margin-top: 32px;
+        }
+
+        .oferta.visivel {
+            display: block;
+            animation: aparecer 0.6s ease;
+        }
+
+        .botao-checkout {
+            display: block;
+            width: min(100%, 560px);
+            margin: 0 auto;
+            padding: 21px 18px;
+            border-radius: 12px;
+            background: var(--verde);
+            color: var(--branco);
+            font-size: clamp(18px, 4vw, 26px);
+            font-weight: 900;
+            line-height: 1.2;
+            text-decoration: none;
+            text-transform: uppercase;
+            box-shadow:
+                0 0 0 6px rgba(22, 163, 74, 0.14),
+                0 15px 40px rgba(22, 163, 74, 0.38);
+            animation: pulsar 1.6s infinite;
+            transition:
+                background-color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .botao-checkout:hover {
+            background: var(--verde-claro);
+            transform: translateY(-2px);
+        }
+
+        .texto-seguranca {
+            margin-top: 14px;
+            color: var(--cinza);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .descricao {
+            max-width: 590px;
+            margin: 28px auto 0;
+            color: #b5b5b5;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .aviso {
+            max-width: 600px;
+            margin: 38px auto 0;
+            color: #707070;
+            font-size: 11px;
+            line-height: 1.55;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulsar {
+            0%,
+            100% {
+                box-shadow:
+                    0 0 0 5px rgba(22, 163, 74, 0.13),
+                    0 15px 40px rgba(22, 163, 74, 0.30);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 0 12px rgba(22, 163, 74, 0.03),
+                    0 18px 50px rgba(22, 163, 74, 0.48);
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px 12px 40px;
+            }
+
+            .headline {
+                margin-bottom: 21px;
+                font-size: 24px;
+            }
+
+            .video-container {
+                border-radius: 10px;
+            }
+
+            .botao-checkout {
+                padding: 19px 15px;
+                font-size: 19px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+
+        <h1 class="headline">
+            Aprenda a Deixar o Pau Duro e Aguentar o Tempo que quiser na Hora do Sexo!
+             (De Forma Fácil e Rápido)
+        </h1>
+
+        <div class="video-container">
+            <div class="video-wrapper">
+
+                <iframe
+                    src="https://www.youtube.com/embed/rGqMN3zk41A?controls=0&disablekb=1&fs=0&playsinline=1&rel=0"
+                    title="Apresentação do Néctar dos Deuses"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    loading="eager"
+                ></iframe>
+
+            </div>
+        </div>
+
+        <div
+            id="oferta"
+            class="oferta"
+        >
+            <a
+                class="botao-checkout"
+                href="https://pay.cakto.com.br/wpb5dp3_704592"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Acessar Néctar dos Deuses agora!
+            </a>
+
+            <p class="texto-seguranca">
+                Acesso imediato após a confirmação do pagamento.
+            </p>
+        </div>
+
+        
+    </main>
+
+    <script>
+        /*
+         * 2 minutos e 15 segundos:
+         * 135 segundos × 1.000 = 135.000 milissegundos.
+         */
+        const TEMPO_PARA_MOSTRAR_BOTAO = 135000;
+
+        window.setTimeout(function () {
+            const oferta = document.getElementById("oferta");
+
+            if (oferta) {
+                oferta.classList.add("visivel");
+            }
+        }, TEMPO_PARA_MOSTRAR_BOTAO);
+    </script>
+</body>
+</html>
