@@ -9,8 +9,8 @@
     >
 
     <meta
-        name="referrer"
-        content="strict-origin-when-cross-origin"
+        name="description"
+        content="Apresentação do Néctar dos Deuses."
     >
 
     <title>Néctar dos Deuses</title>
@@ -23,6 +23,7 @@
             --verde-claro: #22c55e;
             --branco: #ffffff;
             --cinza: #aaaaaa;
+            --controle: #171717;
         }
 
         * {
@@ -78,12 +79,82 @@
             background: #000000;
         }
 
-        .video-wrapper iframe {
-            position: absolute;
-            inset: 0;
+        #video-vsl {
+            display: block;
             width: 100%;
             height: 100%;
+            object-fit: contain;
+            background: #000000;
+        }
+
+        .play-central {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 2;
+            width: 82px;
+            height: 82px;
             border: 0;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.82);
+            color: var(--branco);
+            font-size: 32px;
+            cursor: pointer;
+            transform: translate(-50%, -50%);
+            transition:
+                background-color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .play-central:hover {
+            background: rgba(22, 163, 74, 0.95);
+            transform: translate(-50%, -50%) scale(1.06);
+        }
+
+        .play-central.oculto {
+            display: none;
+        }
+
+        .controles {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: #101010;
+        }
+
+        .controle {
+            flex-shrink: 0;
+            min-width: 48px;
+            height: 42px;
+            padding: 0 13px;
+            border: 1px solid #383838;
+            border-radius: 8px;
+            background: var(--controle);
+            color: var(--branco);
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition:
+                background-color 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .controle:hover {
+            border-color: #555555;
+            background: #272727;
+        }
+
+        .volume-container {
+            display: flex;
+            flex: 1;
+            align-items: center;
+        }
+
+        .volume {
+            width: 100%;
+            cursor: pointer;
+            accent-color: var(--verde);
         }
 
         .oferta {
@@ -163,7 +234,7 @@
             100% {
                 box-shadow:
                     0 0 0 5px rgba(22, 163, 74, 0.13),
-                    0 15px 40px rgba(22, 163, 74, 0.30);
+                    0 15px 40px rgba(22, 163, 74, 0.3);
             }
 
             50% {
@@ -187,6 +258,10 @@
                 border-radius: 10px;
             }
 
+            .controles {
+                padding: 10px;
+            }
+
             .botao-checkout {
                 padding: 19px 15px;
                 font-size: 19px;
@@ -199,22 +274,71 @@
     <main class="container">
 
         <h1 class="headline">
-            Aprenda a Deixar o Pau Duro e Aguentar o Tempo que quiser na Hora do Sexo!
-             (De Forma Fácil e Rápido)
+            Protocolo secreto para deixar o pênis duro sem amolecer
+            e durar o tempo que quiser na hora do sexo
         </h1>
 
         <div class="video-container">
+
             <div class="video-wrapper">
 
-                <iframe
-                    src="https://www.youtube.com/embed/rGqMN3zk41A?controls=0&disablekb=1&fs=0&playsinline=1&rel=0"
-                    title="Apresentação do Néctar dos Deuses"
-                    referrerpolicy="strict-origin-when-cross-origin"
-                    allow="autoplay; encrypted-media; picture-in-picture"
-                    loading="eager"
-                ></iframe>
+                <video
+                    id="video-vsl"
+                    playsinline
+                    preload="metadata"
+                    controlslist="nodownload noplaybackrate nofullscreen"
+                    disablepictureinpicture
+                >
+                    <source src="./video.mp4" type="video/mp4">
+
+                    Seu navegador não conseguiu reproduzir o vídeo.
+                </video>
+
+                <button
+                    id="play-central"
+                    class="play-central"
+                    type="button"
+                    aria-label="Reproduzir vídeo"
+                >
+                    ▶
+                </button>
 
             </div>
+
+            <div class="controles">
+
+                <button
+                    id="play-pause"
+                    class="controle"
+                    type="button"
+                    aria-label="Reproduzir ou pausar vídeo"
+                >
+                    ▶
+                </button>
+
+                <button
+                    id="som"
+                    class="controle"
+                    type="button"
+                    aria-label="Ativar ou desativar som"
+                >
+                    🔊
+                </button>
+
+                <div class="volume-container">
+                    <input
+                        id="volume"
+                        class="volume"
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="80"
+                        aria-label="Volume do vídeo"
+                    >
+                </div>
+
+            </div>
+
         </div>
 
         <div
@@ -235,22 +359,122 @@
             </p>
         </div>
 
-        
+        <p class="descricao">
+            Néctar dos Deuses é um áudio guiado criado para ajudar homens
+            a reduzir a ansiedade de desempenho, fortalecer a confiança
+            e viver os momentos íntimos com mais calma e segurança.
+        </p>
+
+        <p class="aviso">
+            Este produto possui finalidade educacional e de desenvolvimento
+            pessoal. Não substitui diagnóstico, avaliação, acompanhamento
+            psicológico ou tratamento médico. Os resultados podem variar.
+        </p>
+
     </main>
 
     <script>
+        const video = document.getElementById("video-vsl");
+        const playPause = document.getElementById("play-pause");
+        const playCentral = document.getElementById("play-central");
+        const botaoSom = document.getElementById("som");
+        const controleVolume = document.getElementById("volume");
+        const oferta = document.getElementById("oferta");
+
         /*
          * 2 minutos e 15 segundos:
          * 135 segundos × 1.000 = 135.000 milissegundos.
          */
         const TEMPO_PARA_MOSTRAR_BOTAO = 135000;
 
-        window.setTimeout(function () {
-            const oferta = document.getElementById("oferta");
+        /*
+         * Volume inicial em 80%.
+         */
+        video.volume = 0.8;
 
-            if (oferta) {
-                oferta.classList.add("visivel");
+        /*
+         * Reproduz ou pausa o vídeo.
+         */
+        function alternarVideo() {
+            if (video.paused || video.ended) {
+                video.play().catch(function (erro) {
+                    console.error("Não foi possível reproduzir:", erro);
+                });
+            } else {
+                video.pause();
             }
+        }
+
+        /*
+         * Atualiza o botão quando o vídeo começa.
+         */
+        video.addEventListener("play", function () {
+            playPause.textContent = "❚❚";
+            playPause.setAttribute("aria-label", "Pausar vídeo");
+            playCentral.classList.add("oculto");
+        });
+
+        /*
+         * Atualiza o botão quando o vídeo é pausado.
+         */
+        video.addEventListener("pause", function () {
+            playPause.textContent = "▶";
+            playPause.setAttribute("aria-label", "Reproduzir vídeo");
+            playCentral.classList.remove("oculto");
+        });
+
+        /*
+         * Volta ao início quando o vídeo termina.
+         */
+        video.addEventListener("ended", function () {
+            playPause.textContent = "▶";
+            playCentral.classList.remove("oculto");
+        });
+
+        playPause.addEventListener("click", alternarVideo);
+        playCentral.addEventListener("click", alternarVideo);
+
+        /*
+         * Ativa ou desativa o som.
+         */
+        botaoSom.addEventListener("click", function () {
+            video.muted = !video.muted;
+
+            if (video.muted) {
+                botaoSom.textContent = "🔇";
+                botaoSom.setAttribute("aria-label", "Ativar som");
+            } else {
+                botaoSom.textContent = "🔊";
+                botaoSom.setAttribute("aria-label", "Desativar som");
+
+                if (Number(controleVolume.value) === 0) {
+                    controleVolume.value = "80";
+                    video.volume = 0.8;
+                }
+            }
+        });
+
+        /*
+         * Ajusta o volume.
+         */
+        controleVolume.addEventListener("input", function () {
+            const valor = Number(controleVolume.value);
+
+            video.volume = valor / 100;
+            video.muted = valor === 0;
+
+            if (valor === 0) {
+                botaoSom.textContent = "🔇";
+            } else {
+                botaoSom.textContent = "🔊";
+            }
+        });
+
+        /*
+         * Mostra o botão após 2 minutos e 15 segundos.
+         */
+        window.setTimeout(function () {
+            oferta.classList.add("visivel");
         }, TEMPO_PARA_MOSTRAR_BOTAO);
     </script>
 </body>
