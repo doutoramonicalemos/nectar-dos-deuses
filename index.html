@@ -23,7 +23,6 @@
             --verde-claro: #22c55e;
             --branco: #ffffff;
             --cinza: #aaaaaa;
-            --controle: #171717;
         }
 
         * {
@@ -39,7 +38,7 @@
 
         body {
             min-height: 100vh;
-            padding: 26px 14px 50px;
+            padding: 14px 12px 24px;
             background: var(--fundo);
             color: var(--branco);
             font-family: Arial, Helvetica, sans-serif;
@@ -47,34 +46,42 @@
 
         .container {
             width: 100%;
-            max-width: 700px;
+            max-width: 680px;
             margin: 0 auto;
             text-align: center;
         }
 
         .headline {
-            margin-bottom: 25px;
+            margin-bottom: 12px;
             color: var(--amarelo);
-            font-size: clamp(23px, 5vw, 42px);
+            font-size: clamp(18px, 4vw, 30px);
             font-weight: 900;
-            line-height: 1.15;
+            line-height: 1.12;
             text-transform: uppercase;
         }
 
+        .chamada-video {
+            margin-bottom: 10px;
+            color: var(--branco);
+            font-size: clamp(18px, 4vw, 25px);
+            font-weight: 800;
+        }
+
         .video-container {
-            width: min(100%, 400px);
+            width: min(100%, 290px);
             margin: 0 auto;
             overflow: hidden;
-            border: 1px solid #242424;
-            border-radius: 14px;
+            border: 2px solid #292929;
+            border-radius: 12px;
             background: #000000;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8);
         }
 
         .video-wrapper {
             position: relative;
             width: 100%;
             aspect-ratio: 9 / 16;
+            max-height: 54vh;
             overflow: hidden;
             background: #000000;
         }
@@ -87,67 +94,92 @@
             background: #000000;
         }
 
-        .play-central {
+        /* Capa exibida antes do play */
+        .capa-video {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            z-index: 2;
-            width: 82px;
-            height: 82px;
-            border: 0;
-            border-radius: 50%;
-            background: rgba(0, 0, 0, 0.82);
-            color: var(--branco);
-            font-size: 32px;
+            inset: 0;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(40, 40, 40, 0.82),
+                    rgba(0, 0, 0, 0.98)
+                );
             cursor: pointer;
-            transform: translate(-50%, -50%);
             transition:
-                background-color 0.2s ease,
-                transform 0.2s ease;
+                opacity 0.25s ease,
+                visibility 0.25s ease;
         }
 
-        .play-central:hover {
-            background: rgba(22, 163, 74, 0.95);
-            transform: translate(-50%, -50%) scale(1.06);
+        .capa-video.oculta {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
         }
 
-        .play-central.oculto {
-            display: none;
+        .play-grande {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 78px;
+            height: 78px;
+            margin-bottom: 18px;
+            border: 3px solid var(--branco);
+            border-radius: 50%;
+            background: var(--verde);
+            color: var(--branco);
+            font-size: 34px;
+            line-height: 1;
+            box-shadow:
+                0 0 0 8px rgba(22, 163, 74, 0.18),
+                0 12px 30px rgba(0, 0, 0, 0.5);
+            animation: pulsarPlay 1.6s infinite;
+        }
+
+        .texto-capa {
+            color: var(--branco);
+            font-size: clamp(20px, 5vw, 27px);
+            font-weight: 900;
+            line-height: 1.1;
+            text-transform: uppercase;
+            text-shadow: 0 3px 10px #000000;
         }
 
         .controles {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
-            padding: 12px;
-            background: #101010;
+            padding: 9px;
+            background: #111111;
         }
 
         .controle {
-            flex-shrink: 0;
             min-width: 48px;
-            height: 42px;
-            padding: 0 13px;
-            border: 1px solid #383838;
-            border-radius: 8px;
-            background: var(--controle);
+            height: 38px;
+            padding: 0 12px;
+            border: 1px solid #3a3a3a;
+            border-radius: 7px;
+            background: #1c1c1c;
             color: var(--branco);
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
-            transition:
-                background-color 0.2s ease,
-                border-color 0.2s ease;
         }
 
         .controle:hover {
-            border-color: #555555;
-            background: #272727;
+            background: #292929;
         }
 
         .volume-container {
             display: flex;
             flex: 1;
+            max-width: 150px;
             align-items: center;
         }
 
@@ -157,114 +189,179 @@
             accent-color: var(--verde);
         }
 
+        /*
+         * O espaço fica reservado desde o início.
+         * Assim, a página não aumenta quando o botão aparece.
+         */
+        .area-oferta {
+            min-height: 92px;
+            margin-top: 13px;
+        }
+
         .oferta {
-            display: none;
-            margin-top: 32px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            pointer-events: none;
+            transition:
+                opacity 0.5s ease,
+                visibility 0.5s ease,
+                transform 0.5s ease;
         }
 
         .oferta.visivel {
-            display: block;
-            animation: aparecer 0.6s ease;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto;
         }
 
         .botao-checkout {
             display: block;
-            width: min(100%, 560px);
+            width: min(100%, 480px);
             margin: 0 auto;
-            padding: 21px 18px;
-            border-radius: 12px;
+            padding: 16px 14px;
+            border-radius: 11px;
             background: var(--verde);
             color: var(--branco);
-            font-size: clamp(18px, 4vw, 26px);
+            font-size: clamp(18px, 4vw, 23px);
             font-weight: 900;
-            line-height: 1.2;
+            line-height: 1.1;
             text-decoration: none;
             text-transform: uppercase;
             box-shadow:
-                0 0 0 6px rgba(22, 163, 74, 0.14),
-                0 15px 40px rgba(22, 163, 74, 0.38);
-            animation: pulsar 1.6s infinite;
-            transition:
-                background-color 0.2s ease,
-                transform 0.2s ease;
+                0 0 0 5px rgba(22, 163, 74, 0.13),
+                0 12px 30px rgba(22, 163, 74, 0.36);
+            animation: pulsarBotao 1.5s infinite;
         }
 
         .botao-checkout:hover {
             background: var(--verde-claro);
-            transform: translateY(-2px);
         }
 
         .texto-seguranca {
-            margin-top: 14px;
+            margin-top: 8px;
             color: var(--cinza);
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-        .descricao {
-            max-width: 590px;
-            margin: 28px auto 0;
-            color: #b5b5b5;
-            font-size: 14px;
-            line-height: 1.6;
+            font-size: 12px;
         }
 
         .aviso {
-            max-width: 600px;
-            margin: 38px auto 0;
-            color: #707070;
-            font-size: 11px;
-            line-height: 1.55;
+            max-width: 570px;
+            margin: 10px auto 0;
+            color: #676767;
+            font-size: 10px;
+            line-height: 1.4;
         }
 
-        @keyframes aparecer {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+        @keyframes pulsarPlay {
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow:
+                    0 0 0 7px rgba(22, 163, 74, 0.15),
+                    0 12px 30px rgba(0, 0, 0, 0.5);
             }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            50% {
+                transform: scale(1.08);
+                box-shadow:
+                    0 0 0 14px rgba(22, 163, 74, 0.04),
+                    0 15px 35px rgba(0, 0, 0, 0.6);
             }
         }
 
-        @keyframes pulsar {
+        @keyframes pulsarBotao {
             0%,
             100% {
                 box-shadow:
                     0 0 0 5px rgba(22, 163, 74, 0.13),
-                    0 15px 40px rgba(22, 163, 74, 0.3);
+                    0 12px 30px rgba(22, 163, 74, 0.3);
             }
 
             50% {
                 box-shadow:
-                    0 0 0 12px rgba(22, 163, 74, 0.03),
-                    0 18px 50px rgba(22, 163, 74, 0.48);
+                    0 0 0 10px rgba(22, 163, 74, 0.03),
+                    0 15px 38px rgba(22, 163, 74, 0.48);
             }
         }
 
         @media (max-width: 480px) {
             body {
-                padding: 20px 12px 40px;
+                padding: 10px 10px 18px;
             }
 
             .headline {
-                margin-bottom: 21px;
-                font-size: 24px;
+                margin-bottom: 8px;
+                font-size: 18px;
+            }
+
+            .chamada-video {
+                margin-bottom: 8px;
+                font-size: 18px;
             }
 
             .video-container {
-                border-radius: 10px;
+                width: min(100%, 245px);
             }
 
-            .controles {
-                padding: 10px;
+            .video-wrapper {
+                max-height: 49vh;
+            }
+
+            .play-grande {
+                width: 68px;
+                height: 68px;
+                margin-bottom: 14px;
+                font-size: 29px;
+            }
+
+            .texto-capa {
+                font-size: 20px;
+            }
+
+            .area-oferta {
+                min-height: 82px;
+                margin-top: 10px;
             }
 
             .botao-checkout {
-                padding: 19px 15px;
-                font-size: 19px;
+                padding: 14px 11px;
+                font-size: 18px;
+            }
+
+            .aviso {
+                margin-top: 6px;
+                font-size: 9px;
+            }
+        }
+
+        /*
+         * Para celulares com tela muito baixa.
+         */
+        @media (max-height: 700px) {
+            .headline {
+                font-size: 16px;
+            }
+
+            .chamada-video {
+                font-size: 16px;
+            }
+
+            .video-container {
+                width: 220px;
+            }
+
+            .video-wrapper {
+                max-height: 45vh;
+            }
+
+            .area-oferta {
+                min-height: 76px;
+            }
+
+            .botao-checkout {
+                padding: 12px 10px;
+                font-size: 17px;
             }
         }
     </style>
@@ -277,6 +374,10 @@
             Protocolo secreto para deixar o pênis duro sem amolecer
             e durar o tempo que quiser na hora do sexo
         </h1>
+
+        <p class="chamada-video">
+            Aprenda agora como fazer!
+        </p>
 
         <div class="video-container">
 
@@ -294,14 +395,22 @@
                     Seu navegador não conseguiu reproduzir o vídeo.
                 </video>
 
-                <button
-                    id="play-central"
-                    class="play-central"
-                    type="button"
-                    aria-label="Reproduzir vídeo"
+                <div
+                    id="capa-video"
+                    class="capa-video"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Dar play para assistir ao vídeo"
                 >
-                    ▶
-                </button>
+                    <div class="play-grande">
+                        ▶
+                    </div>
+
+                    <div class="texto-capa">
+                        Dê play para<br>
+                        assistir ao vídeo
+                    </div>
+                </div>
 
             </div>
 
@@ -338,32 +447,27 @@
                 </div>
 
             </div>
-
         </div>
 
-        <div
-            id="oferta"
-            class="oferta"
-        >
-            <a
-                class="botao-checkout"
-                href="https://pay.cakto.com.br/wpb5dp3_704592"
-                target="_blank"
-                rel="noopener noreferrer"
+        <div class="area-oferta">
+            <div
+                id="oferta"
+                class="oferta"
             >
-                Acessar Néctar dos Deuses agora!
-            </a>
+                <a
+                    class="botao-checkout"
+                    href="https://pay.cakto.com.br/wpb5dp3_704592"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Quero acesso agora
+                </a>
 
-            <p class="texto-seguranca">
-                Acesso imediato após a confirmação do pagamento.
-            </p>
+                <p class="texto-seguranca">
+                    Acesso imediato após a confirmação do pagamento.
+                </p>
+            </div>
         </div>
-
-        <p class="descricao">
-            Néctar dos Deuses é um áudio guiado criado para ajudar homens
-            a reduzir a ansiedade de desempenho, fortalecer a confiança
-            e viver os momentos íntimos com mais calma e segurança.
-        </p>
 
         <p class="aviso">
             Este produto possui finalidade educacional e de desenvolvimento
@@ -375,8 +479,8 @@
 
     <script>
         const video = document.getElementById("video-vsl");
+        const capaVideo = document.getElementById("capa-video");
         const playPause = document.getElementById("play-pause");
-        const playCentral = document.getElementById("play-central");
         const botaoSom = document.getElementById("som");
         const controleVolume = document.getElementById("volume");
         const oferta = document.getElementById("oferta");
@@ -387,65 +491,87 @@
          */
         const TEMPO_PARA_MOSTRAR_BOTAO = 135000;
 
-        /*
-         * Volume inicial em 80%.
-         */
         video.volume = 0.8;
 
-        /*
-         * Reproduz ou pausa o vídeo.
-         */
+        function reproduzirVideo() {
+            video.play()
+                .then(function () {
+                    capaVideo.classList.add("oculta");
+                })
+                .catch(function (erro) {
+                    console.error(
+                        "Não foi possível reproduzir o vídeo:",
+                        erro
+                    );
+                });
+        }
+
         function alternarVideo() {
             if (video.paused || video.ended) {
-                video.play().catch(function (erro) {
-                    console.error("Não foi possível reproduzir:", erro);
-                });
+                reproduzirVideo();
             } else {
                 video.pause();
             }
         }
 
-        /*
-         * Atualiza o botão quando o vídeo começa.
-         */
-        video.addEventListener("play", function () {
-            playPause.textContent = "❚❚";
-            playPause.setAttribute("aria-label", "Pausar vídeo");
-            playCentral.classList.add("oculto");
+        capaVideo.addEventListener("click", reproduzirVideo);
+
+        capaVideo.addEventListener("keydown", function (evento) {
+            if (
+                evento.key === "Enter" ||
+                evento.key === " "
+            ) {
+                evento.preventDefault();
+                reproduzirVideo();
+            }
         });
 
         /*
-         * Atualiza o botão quando o vídeo é pausado.
+         * Permite tocar no próprio vídeo para pausar ou continuar.
          */
-        video.addEventListener("pause", function () {
-            playPause.textContent = "▶";
-            playPause.setAttribute("aria-label", "Reproduzir vídeo");
-            playCentral.classList.remove("oculto");
-        });
-
-        /*
-         * Volta ao início quando o vídeo termina.
-         */
-        video.addEventListener("ended", function () {
-            playPause.textContent = "▶";
-            playCentral.classList.remove("oculto");
-        });
+        video.addEventListener("click", alternarVideo);
 
         playPause.addEventListener("click", alternarVideo);
-        playCentral.addEventListener("click", alternarVideo);
 
-        /*
-         * Ativa ou desativa o som.
-         */
+        video.addEventListener("play", function () {
+            playPause.textContent = "❚❚";
+            playPause.setAttribute(
+                "aria-label",
+                "Pausar vídeo"
+            );
+
+            capaVideo.classList.add("oculta");
+        });
+
+        video.addEventListener("pause", function () {
+            playPause.textContent = "▶";
+            playPause.setAttribute(
+                "aria-label",
+                "Reproduzir vídeo"
+            );
+        });
+
+        video.addEventListener("ended", function () {
+            playPause.textContent = "▶";
+            video.currentTime = 0;
+            capaVideo.classList.remove("oculta");
+        });
+
         botaoSom.addEventListener("click", function () {
             video.muted = !video.muted;
 
             if (video.muted) {
                 botaoSom.textContent = "🔇";
-                botaoSom.setAttribute("aria-label", "Ativar som");
+                botaoSom.setAttribute(
+                    "aria-label",
+                    "Ativar som"
+                );
             } else {
                 botaoSom.textContent = "🔊";
-                botaoSom.setAttribute("aria-label", "Desativar som");
+                botaoSom.setAttribute(
+                    "aria-label",
+                    "Desativar som"
+                );
 
                 if (Number(controleVolume.value) === 0) {
                     controleVolume.value = "80";
@@ -454,24 +580,19 @@
             }
         });
 
-        /*
-         * Ajusta o volume.
-         */
         controleVolume.addEventListener("input", function () {
             const valor = Number(controleVolume.value);
 
             video.volume = valor / 100;
             video.muted = valor === 0;
 
-            if (valor === 0) {
-                botaoSom.textContent = "🔇";
-            } else {
-                botaoSom.textContent = "🔊";
-            }
+            botaoSom.textContent =
+                valor === 0 ? "🔇" : "🔊";
         });
 
         /*
-         * Mostra o botão após 2 minutos e 15 segundos.
+         * Mostra o botão 2 minutos e 15 segundos
+         * depois que a página é aberta.
          */
         window.setTimeout(function () {
             oferta.classList.add("visivel");
